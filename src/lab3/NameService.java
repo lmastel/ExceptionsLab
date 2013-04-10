@@ -18,18 +18,18 @@ public class NameService {
      * @param fullName - a name containing a first name and a last name
      * @return the last name
      */
-    public String extractLastName(String fullName) throws InvalidNameException {
+    public String extractLastName(String fullName)  {
         
         if (fullName == null || fullName.length() == 0) {
-            throw new IllegalArgumentException(
-                    "Full Name is missing");
+            throw new InvalidNameException(
+                    "Full Name is missing", new NullPointerException());            
         }
         
         for (int i = 0; i < fullName.length(); i++) {
             
             if (Character.isDigit(fullName.charAt(i))) {
-                throw new IllegalArgumentException(
-                      "Full Name cannot contain digits");                
+                throw new InvalidNameException(
+                      "Full Name cannot contain digits", new IllegalArgumentException());                
             }
         }
         
@@ -37,8 +37,8 @@ public class NameService {
             
             if (!Character.isLetter(fullName.charAt(i)) && 
                     fullName.charAt(i) != ' ') {
-                throw new IllegalArgumentException(
-                      "Full Name cannot contain special characters");                
+                throw new InvalidNameException(
+                      "Full Name cannot contain special characters", new IllegalArgumentException());                
             }
         }
 
@@ -48,8 +48,8 @@ public class NameService {
             if (fullName.charAt(i) == ' ') {
                 numberOfSpaces++;
                 if (numberOfSpaces > 1) {
-                    throw new IllegalArgumentException(
-                            "Full Name cannot contain more than 1 space");
+                    throw new InvalidNameException(
+                            "Full Name cannot contain more than 1 space", new IllegalArgumentException());
                 }
             }
         }        
@@ -57,8 +57,8 @@ public class NameService {
         fullName = fullName.trim();
         int indexOfSpace = fullName.indexOf(" ");
         if (indexOfSpace < 0) {
-            throw new IllegalArgumentException(
-                    "Enter First Name, Last Name separated by a space");
+            throw new InvalidNameException(
+                    "Enter First Name, Last Name separated by a space", new IllegalArgumentException());
         }        
         
         String[] nameParts = fullName.split(" ");

@@ -21,7 +21,7 @@ public class NameService {
     public String extractLastName(String fullName) {
         
         if (fullName == null || fullName.length() == 0) {
-            throw new IllegalArgumentException(
+            throw new NullPointerException(
                     "Full Name is missing");
         }
         
@@ -63,7 +63,9 @@ public class NameService {
         
         
         String[] nameParts = fullName.split(" ");
+        System.out.println("No exceptions were thrown in method extractLastName");
         return nameParts[LAST_NAME_IDX];
+        
     }
     
     /**

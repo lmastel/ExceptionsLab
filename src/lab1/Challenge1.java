@@ -44,10 +44,10 @@ public class Challenge1 {
         }
     }
 
-    public String extractLastName(String fullName) throws RuntimeException {
+    public String extractLastName(String fullName) {
         if (fullName == null || fullName.length() == 0) {
             message1 = "Full Name is missing, please re-enter full name";
-            throw new IllegalArgumentException();
+            throw new NullPointerException();
         }
 
         for (int i = 0; i < fullName.length(); i++) {

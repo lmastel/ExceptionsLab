@@ -24,17 +24,19 @@ public class InputOutputGui {
             String msg = "Your last name is: " + lastName;
             JOptionPane.showMessageDialog(null, msg);
         } 
+
         catch (InvalidNameException e) {   
-//            System.err.println(e.getMessage() + "\n");
-//            System.err.println(e.toString() + "\n");
-//            e.printStackTrace();
             String title = "Invalid Name";
             JOptionPane.showMessageDialog(null,
                     e.getMessage(), title, JOptionPane.ERROR_MESSAGE);
+            System.err.println(e.getMessage() + "\n");
+            System.err.println(e.toString() + "\n");
+            e.printStackTrace();
         }
         
         finally {
-            System.out.println("finally");
+            System.exit(0);
+            
         }
         
     }
@@ -42,9 +44,7 @@ public class InputOutputGui {
     public static void main(String[] args) {
         InputOutputGui iog = new InputOutputGui();
 
-        iog.startConversation();
-
-        System.exit(0);
+        iog.startConversation();       
 
     }
 }
