@@ -21,6 +21,7 @@ public class NameService {
     public String extractLastName(String fullName) {
         
         if (fullName == null || fullName.length() == 0) {
+            InputOutputGui.exceptionOccured = true;
             throw new NullPointerException(
                     "Full Name is missing");
         }
@@ -28,6 +29,7 @@ public class NameService {
         for (int i = 0; i < fullName.length(); i++) {
             
             if (Character.isDigit(fullName.charAt(i))) {
+                InputOutputGui.exceptionOccured = true;
                 throw new IllegalArgumentException(
                       "Full Name cannot contain digits");                
             }
@@ -37,6 +39,7 @@ public class NameService {
             
             if (!Character.isLetter(fullName.charAt(i)) && 
                     fullName.charAt(i) != ' ') {
+                InputOutputGui.exceptionOccured = true;
                 throw new IllegalArgumentException(
                       "Full Name cannot contain special characters");                
             }
@@ -48,6 +51,7 @@ public class NameService {
             if (fullName.charAt(i) == ' ') {
                 numberOfSpaces++;
                 if (numberOfSpaces > 1) {
+                    InputOutputGui.exceptionOccured = true;
                     throw new IllegalArgumentException(
                             "Full Name cannot contain more than 1 space");
                 }
@@ -57,13 +61,14 @@ public class NameService {
         fullName = fullName.trim();
         int indexOfSpace = fullName.indexOf(" ");
         if (indexOfSpace < 0) {
+            InputOutputGui.exceptionOccured = true;
             throw new IllegalArgumentException(
+                    
                     "Enter First Name, Last Name separated by a space");
         }        
         
         
-        String[] nameParts = fullName.split(" ");
-        System.out.println("No exceptions were thrown in method extractLastName");
+        String[] nameParts = fullName.split(" ");        
         return nameParts[LAST_NAME_IDX];
         
     }

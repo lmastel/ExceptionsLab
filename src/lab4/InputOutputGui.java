@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 public class InputOutputGui {
 
     private NameService nameService;
+    
+    public static boolean exceptionOccured = false;
 
     public InputOutputGui() {
         nameService = new NameService();
@@ -41,7 +43,11 @@ public class InputOutputGui {
             System.err.println("e3" + e.toString() + "\n");
         } 
         finally {
+            if (exceptionOccured){
+                System.out.println("An exception occured in method extractLastName");
+            } else{
+                System.out.println("No exceptions occured in method extractLastName");
+            }
             System.exit(0);
-        }
-    }
+        }    }
 }
