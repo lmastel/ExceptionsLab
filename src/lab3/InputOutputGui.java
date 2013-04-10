@@ -24,13 +24,19 @@ public class InputOutputGui {
             String msg = "Your last name is: " + lastName;
             JOptionPane.showMessageDialog(null, msg);
         } 
-        catch (InvalidNameException e) {
-            String title = "Invalid Name";            
+        catch (InvalidNameException e) {   
+//            System.err.println(e.getMessage() + "\n");
+//            System.err.println(e.toString() + "\n");
+//            e.printStackTrace();
+            String title = "Invalid Name";
             JOptionPane.showMessageDialog(null,
                     e.getMessage(), title, JOptionPane.ERROR_MESSAGE);
         }
-
-
+        
+        finally {
+            System.out.println("finally");
+        }
+        
     }
 
     public static void main(String[] args) {

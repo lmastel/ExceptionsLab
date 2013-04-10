@@ -19,6 +19,49 @@ public class NameService {
      * @return the last name
      */
     public String extractLastName(String fullName) {
+        
+        if (fullName == null || fullName.length() == 0) {
+            throw new IllegalArgumentException(
+                    "Full Name is missing");
+        }
+        
+        for (int i = 0; i < fullName.length(); i++) {
+            
+            if (Character.isDigit(fullName.charAt(i))) {
+                throw new IllegalArgumentException(
+                      "Full Name cannot contain digits");                
+            }
+        }
+        
+        for (int i = 0; i < fullName.length(); i++) {
+            
+            if (!Character.isLetter(fullName.charAt(i)) && 
+                    fullName.charAt(i) != ' ') {
+                throw new IllegalArgumentException(
+                      "Full Name cannot contain special characters");                
+            }
+        }
+
+        fullName = fullName.trim();        
+        int numberOfSpaces = 0;        
+        for (int i = 0; i < fullName.length(); i++) {
+            if (fullName.charAt(i) == ' ') {
+                numberOfSpaces++;
+                if (numberOfSpaces > 1) {
+                    throw new IllegalArgumentException(
+                            "Full Name cannot contain more than 1 space");
+                }
+            }
+        }        
+
+        fullName = fullName.trim();
+        int indexOfSpace = fullName.indexOf(" ");
+        if (indexOfSpace < 0) {
+            throw new IllegalArgumentException(
+                    "Enter First Name, Last Name separated by a space");
+        }        
+        
+        
         String[] nameParts = fullName.split(" ");
         return nameParts[LAST_NAME_IDX];
     }

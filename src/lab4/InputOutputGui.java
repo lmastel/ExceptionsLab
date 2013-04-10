@@ -24,6 +24,11 @@ public class InputOutputGui {
             String msg = "Your last name is: " + lastName;
             JOptionPane.showMessageDialog(null, msg);
         }
-
+        
+        catch (RuntimeException e) {            
+             
+             System.out.println("catch by startConversation");
+             System.out.println(e.getCause().toString());
+        }        
     }
 }

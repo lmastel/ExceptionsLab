@@ -21,62 +21,48 @@ public class NameService {
      */
 //    public String extractLastName(String fullName) throws IllegalArgumentException,
 //            ArrayIndexOutOfBoundsException {
-        public String extractLastName(String fullName) {
+    public String extractLastName(String fullName) {
 
         if (fullName == null || fullName.length() == 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(
+                    "Full Name is missing");
+        }
+        
+        for (int i = 0; i < fullName.length(); i++) {
+            
+            if (Character.isDigit(fullName.charAt(i))) {
+                throw new IllegalArgumentException(
+                      "Full Name cannot contain digits");                
+            }
+        }
+        
+        for (int i = 0; i < fullName.length(); i++) {
+            
+            if (!Character.isLetter(fullName.charAt(i)) && 
+                    fullName.charAt(i) != ' ') {
+                throw new IllegalArgumentException(
+                      "Full Name cannot contain special characters");                
+            }
         }
 
-        int numberOfSpaces = 0;
+        fullName = fullName.trim();        
+        int numberOfSpaces = 0;        
         for (int i = 0; i < fullName.length(); i++) {
             if (fullName.charAt(i) == ' ') {
                 numberOfSpaces++;
                 if (numberOfSpaces > 1) {
-                    //message1 = "Full Name cannot contain more than 1 space";
                     throw new IllegalArgumentException(
                             "Full Name cannot contain more than 1 space");
                 }
             }
-        }
+        }        
 
-        for (int i = 0; i < fullName.length(); i++) {
-            if (fullName.charAt(i) == '0'
-                    || fullName.charAt(i) == '1'
-                    || fullName.charAt(i) == '2'
-                    || fullName.charAt(i) == '3'
-                    || fullName.charAt(i) == '4'
-                    || fullName.charAt(i) == '5'
-                    || fullName.charAt(i) == '6'
-                    || fullName.charAt(i) == '7'
-                    || fullName.charAt(i) == '8'
-                    || fullName.charAt(i) == '9') {
-                //message1 = "Full Name cannot contain numbers";
-                throw new IllegalArgumentException(
-                        "Full Name cannot contain numbers");
-            }
-        }
-        
         fullName = fullName.trim();
         int indexOfSpace = fullName.indexOf(" ");
         if (indexOfSpace < 0) {
-            //message1 = "Enter First Name, Last Name separated by a space";
             throw new IllegalArgumentException(
-                        "Enter First Name, Last Name separated by a space");
-        }
-        
-        for (int i = 0; i < fullName.length(); i++) {
-            if ((fullName.charAt(i) >= 'a'
-                    && fullName.charAt(i) <= 'z')
-                    || (fullName.charAt(i) >= 'A'
-                    && fullName.charAt(i) <= 'Z')) {
-                //message1 = "Full Name cannot contain special characters";
-                throw new IllegalArgumentException(
-                        "Full Name cannot contain special characters");
-
-            }
-        }
-        
-        
+                    "Enter First Name, Last Name separated by a space");
+        }        
 
         String[] nameParts = fullName.split(" ");
         return nameParts[LAST_NAME_IDX];
